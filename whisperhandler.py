@@ -32,6 +32,10 @@ class WhisperHandler(threading.Thread):
 
 
     def transcribe(self, file: str):
+        """
+        Transcribes a file and then adds the transcription to this object's attribute.
+        """
+
         print("transcription of file start")
         now = time()
 
@@ -41,7 +45,7 @@ class WhisperHandler(threading.Thread):
         result = self.model.transcribe(file)
 
         length = time() - now
-        print(f"transcription of previous file end: {length}")
+        print(f"transcription of file end: {length}")
 
         self.total_transcription += result["text"]
 
@@ -99,8 +103,7 @@ class WhisperHandler(threading.Thread):
             # if no other files exist, wait
             self.transcribe(counter + self.output_file)
 
-            # print(f"saving new output to {output_file}")
-            print("part complete")
+            print("part complete") if self.use_time_cap else print("complete")
 
             if use_counter:
                 counter += 1

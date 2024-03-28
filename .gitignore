@@ -1,5 +1,5 @@
 __pycache__/*
 models/*
 venv/
-output.wav
+*.wav
 models

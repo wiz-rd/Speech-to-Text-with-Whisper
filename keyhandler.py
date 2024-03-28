@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from pathlib import Path
 import pynput
 from whisperhandler import WhisperHandler
@@ -5,6 +6,9 @@ from whisperhandler import WhisperHandler
 END_KEY = pynput.keyboard.Key.f4
 
 def main(overwrite: bool = False, duration: int | float = 30, rolling: bool = False, model: str = "medium", end_key = END_KEY):
+    """
+    Records, saves, and then transcribes audio from the microphone.
+    """
     main_thread = WhisperHandler(overwrite=overwrite, seconds_to_record=duration, use_time_cap=rolling, model=model)
 
     # should it cap to x amount of time
@@ -34,7 +38,7 @@ def main(overwrite: bool = False, duration: int | float = 30, rolling: bool = Fa
 
 def transcribe(input_file: str | Path) -> str:
     """
-    Transcribes a file by importing WhisperHandler
+    Transcribes a file WITHOUT listening by importing WhisperHandler
     """
 
     main_thread = WhisperHandler()
